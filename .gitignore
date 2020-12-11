@@ -4,6 +4,7 @@ Thumbs.db
 #Ignore files built by Visual Studio
 *.obj
 *.exe
+*.dll
 *.pdb
 *.user
 *.aps
@@ -30,3 +31,6 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/VSLinqPadExtension/LinqPad/LINQPad.GUI.runtimeconfig.json
+/VSLinqPadExtension/LinqPad/LINQPad.Runtime.runtimeconfig.json
+/VSLinqPadExtension/LinqPad/ConnectionsV2.xml
