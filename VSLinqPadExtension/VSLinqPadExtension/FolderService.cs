@@ -21,13 +21,21 @@ namespace VSLinqPadExtension
             this.dte = dte;
         }
 
-
+        /// <summary>
+        /// Get folder on disk for the LinqPad project
+        /// </summary>
+        /// <returns></returns>
         public string GetPath()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             return Path.GetDirectoryName(dte.Solution.FullName);
         }
 
+        /// <summary>
+        /// Get folder on disk for a project item
+        /// </summary>
+        /// <param name="pItem"></param>
+        /// <returns></returns>
         public string GetPath(ProjectItem pItem)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -38,6 +46,12 @@ namespace VSLinqPadExtension
             return pItem.Properties.Item("FullPath").Value.ToString();
         }
 
+
+        /// <summary>
+        /// Get folder on disk for a project
+        /// </summary>
+        /// <param name="pItem">Project</param>
+        /// <returns>disk path</returns>
         public string GetPath(Project pItem)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -49,6 +63,11 @@ namespace VSLinqPadExtension
         }
 
 
+
+        /// <summary>
+        /// Get VS Project item for the LinqPad project
+        /// </summary>
+        /// <returns></returns>
         public Project GetLINQPadProject()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -60,6 +79,14 @@ namespace VSLinqPadExtension
             return solutionFolder;
         }
 
+
+
+        /// <summary>
+        /// Get VS ProjectItem based on diskpath
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
         public ProjectItem GetSolutionFolder(Project project, string fullPath)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -106,11 +133,7 @@ namespace VSLinqPadExtension
             {
                 if (item is FileInfo)
                 {
-                    var ext = Path.GetExtension(item.FullName);
-                    if (".xml.linq".Contains(ext))
-                    {
-                        project.ProjectItems.AddFromFile(item.FullName);
-                    }
+                    AddFile(item.FullName);
                 }
                 else if (item is DirectoryInfo)
                 {
@@ -131,6 +154,29 @@ namespace VSLinqPadExtension
         }
 
 
+
+        /// <summary>
+        /// Add file to project folder
+        /// </summary>
+        /// <param name="path"></param>
+        public void AddFile(string path)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+            var project = GetLINQPadProject();
+            var ext = Path.GetExtension(path);
+            if (".xml.linq".Contains(ext))
+            {
+                var folder = GetSolutionFolder(project, path);
+                if( folder == null )
+                {
+                    project.ProjectItems.AddFromFile(path);
+                }
+                else
+                {
+                    folder.ProjectItems.AddFromFile(path);
+                }
+            }
+        }
 
 
 
