@@ -31,6 +31,7 @@ namespace VSLinqPadExtension
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(VSLinqPadExtensionPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideAutoLoad(UIContextGuids.SolutionExists , PackageAutoLoadFlags.BackgroundLoad )]
     public sealed class VSLinqPadExtensionPackage : AsyncPackage
     {
         /// <summary>
@@ -47,6 +48,8 @@ namespace VSLinqPadExtension
         /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
+            SolutionEvents.OnAfterOpenSolution += SolutionEvents_OnAfterOpenSolution;
+
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);            
@@ -54,5 +57,16 @@ namespace VSLinqPadExtension
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SolutionEvents_OnAfterOpenSolution(object sender, OpenSolutionEventArgs e)
+        {            
+            var dte = (EnvDTE80.DTE2)this.GetService(typeof(EnvDTE.DTE));
+            var folderService = new FolderService(dte);
+
+            ThreadHelper.ThrowIfNotOnUIThread();
+            folderService.SolutionAddItems();
+        }
     }
 }
