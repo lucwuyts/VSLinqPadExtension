@@ -66,7 +66,11 @@ namespace VSLinqPadExtension
             var folderService = new FolderService(dte);
 
             ThreadHelper.ThrowIfNotOnUIThread();
-            folderService.SolutionAddItems();
+            var LinqPadProject = folderService.GetLINQPadProject();
+            if (LinqPadProject != null)
+            {
+                folderService.SolutionAddItems();
+            }
         }
     }
 }
