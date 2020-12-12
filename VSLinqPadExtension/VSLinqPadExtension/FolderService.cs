@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace VSLinqPadExtension
 {
-    public  class FolderHelper
+    public class FolderService
     {
 
         DTE2 dte;
 
-        public FolderHelper( DTE2 dte)
+        public FolderService(DTE2 dte)
         {
             this.dte = dte;
         }
@@ -60,18 +60,18 @@ namespace VSLinqPadExtension
             return solutionFolder;
         }
 
-        public ProjectItem GetSolutionFolder( Project project , string fullPath )
+        public ProjectItem GetSolutionFolder(Project project, string fullPath)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             // a projectItem has a backslash at the ending of the path
             fullPath += @"\";
-            foreach( ProjectItem item in  project.ProjectItems)
+            foreach (ProjectItem item in project.ProjectItems)
             {
                 var path = GetPath(item);
                 if (path.Equals(fullPath))
                 {
                     return item;
-                }                              
+                }
             }
             return null;
         }
@@ -87,7 +87,7 @@ namespace VSLinqPadExtension
 
             if (LinqPadProject == null)
                 throw new Exception($"SolutionFolder {Constants.LINQPad}  not found.");
-            
+
             var filePath = GetPath(LinqPadProject);
             AddItems(filePath);
         }
@@ -134,14 +134,14 @@ namespace VSLinqPadExtension
 
 
 
-        void AddFiles(ProjectItem folder, string path  )
+        void AddFiles(ProjectItem folder, string path)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             var di = new DirectoryInfo(path);
             // only files
-            foreach( var item in di.GetFileSystemInfos() )
+            foreach (var item in di.GetFileSystemInfos())
             {
-                if( item is FileInfo)
+                if (item is FileInfo)
                 {
                     var ext = Path.GetExtension(item.FullName);
                     if (".xml.linq".Contains(ext))

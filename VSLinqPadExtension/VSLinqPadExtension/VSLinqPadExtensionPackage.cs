@@ -1,7 +1,12 @@
-﻿using Microsoft.VisualStudio.Shell;
+﻿using Microsoft;
+using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Events;
+using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSLinqPadExtension
@@ -31,9 +36,7 @@ namespace VSLinqPadExtension
         /// <summary>
         /// VSLinqPadExtensionPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "f55338c0-fab2-4ecc-9389-75ea1088233d";
-
-        #region Package Members
+        public const string PackageGuidString = "f55338c0-fab2-4ecc-9389-75ea1088233d";        
 
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
@@ -46,10 +49,10 @@ namespace VSLinqPadExtension
         {
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
-            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);            
             await StartLinqPad.InitializeAsync(this);
         }
 
-        #endregion
+
     }
 }

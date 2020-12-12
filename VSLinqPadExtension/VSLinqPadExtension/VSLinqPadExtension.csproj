@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="FolderHelper.cs" />
+    <Compile Include="FolderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartLinqPad.cs" />
     <Compile Include="VSLinqPadExtensionPackage.cs" />
