@@ -55,7 +55,7 @@
     <Content Include="Resources\LinqPad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="template\LinqPad.ico">
+    <Content Include="template\LINQPad.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="template\ProjectTemplate.csproj">

@@ -9,6 +9,11 @@
 		<OutputType>Library</OutputType>
     <FileAlignment>512</FileAlignment>
 	</PropertyGroup>
-	<ItemGroup>
-	</ItemGroup>
- </Project>
+  <ItemGroup>
+    <Folder Include="drivers\" />
+    <Folder Include="plugins\" />
+    <Folder Include="Queries\" />
+    <Folder Include="snippets\" />
+  </ItemGroup>
+
+</Project>

@@ -41,11 +41,6 @@ namespace VSLinqPadExtension
         public const string PackageGuidString = "f55338c0-fab2-4ecc-9389-75ea1088233d";
 
 
-        /// <summary>
-        /// Used to monitor file actions in the LinqProject
-        /// </summary>
-        FileSystemWatcher Watcher;
-
         FolderService FolderService;
 
 
@@ -72,43 +67,15 @@ namespace VSLinqPadExtension
         /// Add a FileSystemWatcher to monitor file actions in the LinqPad project
         /// </summary>
         private void SolutionEvents_OnAfterOpenSolution(object sender, OpenSolutionEventArgs e)
-        {            
+        {
             var dte = (EnvDTE80.DTE2)this.GetService(typeof(EnvDTE.DTE));
             FolderService = new FolderService(dte);
 
             ThreadHelper.ThrowIfNotOnUIThread();
-            var LinqPadProject = FolderService.GetLINQPadProject();
-            if (LinqPadProject != null)
-            {
-                Watcher = new FileSystemWatcher();
-                Watcher.Path = FolderService.GetPath();
-                Watcher.Created += (s, a) => {
-                    JoinableTaskFactory.RunAsync(async delegate
-                   {
-                       await Watcher_CreatedAsync(s, a);
-                   });
-                };
-                Watcher.Deleted += Watcher_Deleted;
-                Watcher.IncludeSubdirectories = true;
-                Watcher.EnableRaisingEvents = true;
+            // add existing files
+            FolderService.SolutionAddItems();
 
-                // add existing files
-                FolderService.SolutionAddItems();
-            }
         }
 
-        private void Watcher_Deleted(object sender, FileSystemEventArgs e)
-        {
-            
-        }
-
-        private async Task Watcher_CreatedAsync(object sender, FileSystemEventArgs e)
-        {
-            await this.JoinableTaskFactory.SwitchToMainThreadAsync();
-            //ThreadHelper.ThrowIfNotOnUIThread();
-            var fileName = e.FullPath;
-            var ext = Path.GetExtension(fileName);
-            FolderService.AddFile(fileName);
-        }
     }
 }
