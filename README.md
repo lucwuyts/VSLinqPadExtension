@@ -11,6 +11,9 @@ Download this extension from the Visual Studio Marketplace
 
 With this extension, a button is added on the solution toolbar to start a portable version of LinqPad within your solution.
 
+![Toolbar with button](img/01.png "Toolbar with extra button")
+
+
 A folder "LinqPad" with the necessary items is created within your solution, where LinqPad is launched.
 
 This puts all your queries and connections in your solution.

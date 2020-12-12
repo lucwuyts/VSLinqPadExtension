@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VSLinqPadExtension
 {
@@ -113,9 +114,19 @@ namespace VSLinqPadExtension
             var LinqPadProject = GetLINQPadProject();
 
             if (LinqPadProject == null)
-                throw new Exception($"SolutionFolder {Constants.LINQPad}  not found.");
+            {
+                var message = "LINQPad project does not exist";
+                MessageBox.Show(message);
+                //Dialog.ShowMessage(dte, message, "Error");
+                return;
+            }
 
             var filePath = GetPath(LinqPadProject);
+            if(!Directory.Exists(filePath))
+            {
+                MessageBox.Show($"LINQPad project on disk is missing.  {filePath}");
+                return;
+            }
             AddItems(filePath);
         }
 

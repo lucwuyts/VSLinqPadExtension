@@ -74,7 +74,6 @@ namespace VSLinqPadExtension
             ThreadHelper.ThrowIfNotOnUIThread();
             // add existing files
             FolderService.SolutionAddItems();
-
         }
 
     }
