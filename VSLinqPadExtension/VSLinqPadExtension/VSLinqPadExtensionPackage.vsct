@@ -94,7 +94,7 @@
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidVSLinqPadExtensionPackageCmdSet" value="{a15da661-356a-4878-a9e8-36c37a7f38d5}">
-      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <!-- <IDSymbol name="MyMenuGroup" value="0x1020" /> -->
       <IDSymbol name="StartLinqPadId" value="0x0100" />
     </GuidSymbol>
 
