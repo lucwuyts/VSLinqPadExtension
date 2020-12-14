@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSLinqPadExtension.272cb414-62ee-4a78-a2ad-4730a19d6f09" Version="1.0" Language="en-US" Publisher="Luc Wuyts" />
+        <Identity Id="VSLinqPadExtension.272cb414-62ee-4a78-a2ad-4730a19d6f09" Version="1.1" Language="en-US" Publisher="Luc Wuyts" />
         <DisplayName>VSLinqPadExtension</DisplayName>
         <Description xml:space="preserve">Add LINQPad6 project folder to your solution. LINQPad Queries and Connections are kept in your solution folder.
 </Description>
