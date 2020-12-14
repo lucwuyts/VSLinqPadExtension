@@ -14,9 +14,11 @@ With this extension, a button is added on the solution toolbar to start a portab
 ![Toolbar with button](img/01.png "Toolbar with extra button")
 
 
-A folder "LinqPad" with the necessary items is created within your solution, where LinqPad is launched.
+A project "LinqPad" with the necessary items is created within your solution, where LinqPad is launched.
 
 This puts all your queries and connections in your solution.
+
+![Visual studio extra project](img/02.png "Extra project in Visual Studio")
 
 Note: This requires LinqPad6 (64-bit version)
 
